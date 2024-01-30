@@ -1,5 +1,3 @@
-// typeDefs.js
-
 const { gql } = require("apollo-server");
 
 // Define the User type
