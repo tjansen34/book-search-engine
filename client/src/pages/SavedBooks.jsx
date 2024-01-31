@@ -1,15 +1,9 @@
-import { useState, useEffect } from 'react';
-import {
-  Container,
-  Card,
-  Button,
-  Row,
-  Col
-} from 'react-bootstrap';
+import { useState, useEffect } from "react";
+import { Container, Card, Button, Row, Col } from "react-bootstrap";
 
-import { getMe, deleteBook } from '../utils/API';
-import Auth from '../utils/auth';
-import { removeBookId } from '../utils/localStorage';
+import { getMe, deleteBook } from "../utils/API";
+import Auth from "../utils/auth";
+import { removeBookId } from "../utils/localStorage";
 
 const SavedBooks = () => {
   const [userData, setUserData] = useState({});
@@ -29,7 +23,7 @@ const SavedBooks = () => {
         const response = await getMe(token);
 
         if (!response.ok) {
-          throw new Error('something went wrong!');
+          throw new Error("something went wrong!");
         }
 
         const user = await response.json();
@@ -54,7 +48,7 @@ const SavedBooks = () => {
       const response = await deleteBook(bookId, token);
 
       if (!response.ok) {
-        throw new Error('something went wrong!');
+        throw new Error("something went wrong!");
       }
 
       const updatedUser = await response.json();
@@ -79,10 +73,12 @@ const SavedBooks = () => {
         </Container>
       </div>
       <Container>
-        <h2 className='pt-5'>
+        <h2 className="pt-5">
           {userData.savedBooks.length
-            ? `Viewing ${userData.savedBooks.length} saved ${userData.savedBooks.length === 1 ? 'book' : 'books'}:`
-            : 'You have no saved books!'}
+            ? `Viewing ${userData.savedBooks.length} saved ${
+                userData.savedBooks.length === 1 ? "book" : "books"
+              }:`
+            : "You have no saved books!"}
         </h2>
         <Row>
           {userData.savedBooks.map((book) => {
