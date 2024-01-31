@@ -1,4 +1,3 @@
-import React from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { Container, Card, Button, Row, Col } from "react-bootstrap";
 import { GET_ME, REMOVE_BOOK } from "../utils/queries"; // Import your GraphQL queries/mutations
