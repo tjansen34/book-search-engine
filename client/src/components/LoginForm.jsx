@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 import { useMutation } from "@apollo/client"; // Import useMutation from Apollo Client
 
-import { LOGIN_USER } from "../utils/graphql"; // Import your LOGIN_USER mutation
+import { LOGIN_USER } from "../utils/mutations"; // Import your LOGIN_USER mutation
 import Auth from "../utils/auth";
 
 const LoginForm = () => {
