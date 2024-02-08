@@ -1,6 +1,7 @@
 import { useQuery, useMutation } from "@apollo/client";
 import { Container, Card, Button, Row, Col } from "react-bootstrap";
-import { GET_ME, REMOVE_BOOK } from "../utils/queries"; // Import your GraphQL queries/mutations
+import { GET_ME } from "../utils/queries";
+import { REMOVE_BOOK } from "../utils/mutations"; // Import your GraphQL queries/mutations
 import Auth from "../utils/auth";
 import { removeBookId } from "../utils/localStorage";
 
