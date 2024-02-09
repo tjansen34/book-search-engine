@@ -2,52 +2,56 @@ const { Book } = require("../models");
 
 module.exports = {
   // get a single book by its id
-  async getSingleBook({ params }, res) {
-    const foundBook = await Book.findById(params.id);
-
-    if (!foundBook) {
-      return res
-        .status(400)
-        .json({ message: "Cannot find a book with this id!" });
-    }
-
-    res.json(foundBook);
-  },
-  // create a book
-  async createBook({ body }, res) {
-    const book = await Book.create(body);
-
-    if (!book) {
-      return res.status(400).json({ message: "Something is wrong!" });
-    }
-
-    res.json(book);
-  },
+  Query: {
+    // Resolver function for getting a single book by its ID
+    getSingleBook: async (_, { id }) => {
+      try {
+        const foundBook = await Book.findById(id);
+        if (!foundBook) {
+          throw new Error("Book not found");
+        }
+        return foundBook;
+      } catch (error) {
+        throw new Error(`Error fetching book: ${error.message}`);
+      }
+    },
+ Mutation: {
+    // Resolver function for creating a new book
+    createBook: async (_, { input }) => {
+      try {
+        const newBook = await Book.create(input);
+        return newBook;
+      } catch (error) {
+        throw new Error(`Error creating book: ${error.message}`);
+      }
+    },
   // update a book by its id
-  async updateBook({ params, body }, res) {
-    const updatedBook = await Book.findByIdAndUpdate(params.id, body, {
-      new: true,
-      runValidators: true,
-    });
-
-    if (!updatedBook) {
-      return res
-        .status(404)
-        .json({ message: "Couldn't find book with this id!" });
-    }
-
-    res.json(updatedBook);
-  },
+  updateBook: async (_, { id, input }) => {
+      try {
+        const updatedBook = await Book.findByIdAndUpdate(id, input, {
+          new: true,
+          runValidators: true,
+        });
+        if (!updatedBook) {
+          throw new Error("Book not found");
+        }
+        return updatedBook;
+      } catch (error) {
+        throw new Error(`Error updating book: ${error.message}`);
+      }
+    },
   // delete a book by its id
-  async deleteBook({ params }, res) {
-    const deletedBook = await Book.findByIdAndDelete(params.id);
-
-    if (!deletedBook) {
-      return res
-        .status(404)
-        .json({ message: "Couldn't find book with this id!" });
+   deleteBook: async (_, { id }) => {
+      try {
+        const deletedBook = await Book.findByIdAndDelete(id);
+        if (!deletedBook) {
+          throw new Error("Book not found");
+        }
+        return deletedBook;
+      } catch (error) {
+        throw new Error(`Error deleting book: ${error.message}`);
+      }
     }
-
-    res.json(deletedBook);
-  },
-};
+  }
+}
+}
